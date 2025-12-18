@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/flask-hello-local
+  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/flask-hello-simple
 
 jobs:
   ci:
@@ -74,7 +74,7 @@ jobs:
           script: |
             docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ env.IMAGE_NAME }}:latest
-            docker stop flask-hello-local || true
-            docker rm flask-hello-local || true
+            docker stop flask-hello-simple || true
+            docker rm flask-hello-simple || true
 
-            docker run -d --name flask-hello-local --restart unless-stopped -p 80:5000 ${{ env.IMAGE_NAME }}:latest
+            docker run -d --name flask-hello-simple --restart unless-stopped -p 80:5000 ${{ env.IMAGE_NAME }}:latest
