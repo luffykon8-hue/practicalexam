@@ -21,10 +21,11 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Python deps
+      - name: Install Python deps and CLI tools
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pytest bandit pip-audit
 
       - name: Run tests
         env:
@@ -54,7 +55,6 @@ jobs:
 
       - name: Scan Docker image with Trivy (run CLI)
         run: |
-          docker pull aquasec/trivy:latest
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --format table ${{ env.IMAGE_NAME }}:${{ github.sha }} || true
 
 
@@ -76,5 +76,5 @@ jobs:
             docker pull ${{ env.IMAGE_NAME }}:latest
             docker stop flask-hello || true
             docker rm flask-hello || true
-            
+
             docker run -d --name flask-hello --restart unless-stopped -p 80:5000 ${{ env.IMAGE_NAME }}:latest
