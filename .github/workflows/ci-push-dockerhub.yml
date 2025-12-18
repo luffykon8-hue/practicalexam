@@ -74,7 +74,7 @@ jobs:
           script: |
             docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ env.IMAGE_NAME }}:latest
-            docker stop flask-hello || true
-            docker rm flask-hello || true
-            
-            docker run -d --name flask-hello --restart unless-stopped -p 80:5000 ${{ env.IMAGE_NAME }}:latest
+            docker stop flask-hello-local || true
+            docker rm flask-hello-local || true
+
+            docker run -d --name flask-hello-local --restart unless-stopped -p 80:5000 ${{ env.IMAGE_NAME }}:latest
