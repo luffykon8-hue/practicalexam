@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-WORKDIR /api
+WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["python", "api.py"]
+CMD ["python", "app.py"]
