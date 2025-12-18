@@ -2,7 +2,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route("/users")
+@app.route("/")
 def home():
     return "Hello This is my Flask API Testing. Practical Exam"
 if __name__ == "__main__":
